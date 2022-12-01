@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<h1>상품 정보 리스트(if, unless)</h1>
+
+	<div>
+		<!-- 원래는 ex5?key=value로 전달하는데 괄호(넘길 변수 = 넘길 데이터)를 사용하여 넘길 수 있다. -->
+		<a th:href="@{/thymeleaf/ex5(param1 = '데이터1', param2 = '데이터2')}">매개변수전달</a>
+	</div>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<td>번호</td>
+				<td>상품명</td>
+				<td>상품설명</td>
+				<td>가격</td>
+				<td>상품등록일</td>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- itemDtop로 list를 받아오겠다.  -->
+			<tr th:each=" itemDto, status : ${list}">
+				<!-- 짝수인지 홀수인지 확인. 짝수일 때 찍을 글자 -->
+				<td th:if="${status.even}" th:text="짝수" style="color: red;"></td>
+				<!-- 홀수일 때 찍을 글자 -->
+				<td th:unless="${status.even}" th:text="홀수" style="color: blue;"></td>
+				<td th:text="${status.index}"></td>
+				<td th:text="${itemDto.itemNm}"></td>
+				<td th:text="${itemDto.itemDetail}"></td>
+				<td th:text="${itemDto.price}"></td>
+				<td th:text="${itemDto.regTime}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+
+</html>
